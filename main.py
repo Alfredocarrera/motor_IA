@@ -184,5 +184,5 @@ def consultar():
     inferir(base_de_conocimiento, base_de_hechos)
 
 
-# Ejecutar
+# Ejecutar programa
 consultar()
