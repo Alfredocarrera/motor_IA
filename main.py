@@ -60,7 +60,34 @@ base_de_conocimiento = [
         "conclusion": "Limpiar ventiladores y reaplicar pasta térmica",
         "confianza": 0.90
     },
-    
+    #codigo nuevo agregando reglas implementacion de Mario Villatoro
+    {
+       "id": "R08",
+       "descripcion": "Perifericos dañados",
+       "condiciones": ["puntero_no_mueve", "sin_video","teclas_no_reaccionan"],
+       "conclusion": "Desconecta los perifericos y prubelos, si el problema persiste debes cambiarlos",
+       "confianza": 0.90
+   },
+   {
+       "id": "R09",
+       "descripcion": "Drivers corruptos",
+       "condiciones": ["fallo_audio","sin_video", "pantalla_azul_frecuente"],
+       "conclusion": "Actualizar drivers o reinstalarlos si es necesario",
+       "confianza": 0.85
+   },
+   {"id": "R010",
+       "descripcion": "Perdida de fecha y hora de la BIOS",
+       "condiciones": ["Hora_no_coincide", "Mensajes_de_error_al_arrancar"],
+       "conclusion": "Actualizar drivers y testear memoria RAM con MemTest86",
+       "confianza": 0.70
+   },{
+       "id": "R011",
+       "descripcion": "El error esta en la silla",
+       "condiciones": [],
+       "conclusion": "Borrar carpeta Sistem32",
+       "confianza": 1
+   },
+
 ]
 
 
