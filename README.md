@@ -9,6 +9,8 @@
  ### Nivel 1 — Agregar reglas: Agrega 3 reglas nuevas al sistema. Inventa nuevos síntomas y diagnósticos. Verifica que la equiparación las detecte correctamente con pruebas manuales.
  ### Nivel 2 — Múltiples diagnósticos: Modifica el motor para que retorne TODOS los diagnósticos posibles ordenados por confianza, en lugar de solo el de mayor confianza. El usuario puede ver el ranking completo.
 
+## SE INCLUYE ARCHIVO REFLEXIONES.PDF donde se encuetran las respuestas de las distintas preguntas del proyecto
+
 ## Desarrolladores del Proyecto:
 ### Alfredo Carrera  
 ### Mario Villatoro 
