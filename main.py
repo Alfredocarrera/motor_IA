@@ -60,6 +60,7 @@ base_de_conocimiento = [
         "conclusion": "Limpiar ventiladores y reaplicar pasta térmica",
         "confianza": 0.90
     },
+    
 ]
 
 
@@ -76,13 +77,13 @@ base_de_hechos = set()  # vacía al inicio, se llena con los síntomas
 # COMPONENTE 3: MOTOR DE INFERENCIA
 # Funciones de equiparación y resolución de conflictos
 # ──────────────────────────────────────────────────────────────
-
+"""
 def equiparar(base_conocimiento, hechos):
-    """
     Proceso de equiparación (pattern matching).
     Retorna todas las reglas cuyas condiciones están satisfechas
     por los hechos actuales. Esto es el 'conflict set'.
-    """
+    
+    
     conflict_set = []
     for regla in base_conocimiento:
         # Verificar si TODOS los síntomas de la regla están en los hechos
@@ -93,10 +94,10 @@ def equiparar(base_conocimiento, hechos):
 
 
 def resolver_conflictos(conflict_set):
-    """
+    
     Estrategia de resolución de conflictos: mayor confianza.
     Si hay empate, preferir la regla con más condiciones (más específica).
-    """
+    
     if not conflict_set:
         return None
     return max(
@@ -106,10 +107,10 @@ def resolver_conflictos(conflict_set):
 
 
 def inferir(base_conocimiento, hechos):
-    """
+    
     Motor de inferencia principal.
     Ejecuta el ciclo de equiparación → resolución → ejecución.
-    """
+    
     print()
     print('━' * 55)
     print('  MOTOR DE INFERENCIA INICIADO')
@@ -145,7 +146,71 @@ def inferir(base_conocimiento, hechos):
         print(f'  Reglas descartadas por menor confianza: {descartadas}')
     print('━' * 55)
 
+"""
 
+def equiparar(base_conocimiento, hechos):
+    """
+    Proceso de equiparación (pattern matching).
+    Retorna todas las reglas cuyas condiciones están satisfechas
+    por los hechos actuales.
+    """
+    conflict_set = []
+    for regla in base_conocimiento:
+        if set(regla['condiciones']).issubset(hechos):
+            conflict_set.append(regla)
+    return conflict_set
+
+
+def ordenar_diagnosticos(conflict_set):
+    """
+    Ordena el conflict set de mayor a menor confianza.
+    Criterio secundario: cantidad de condiciones (reglas más específicas).
+    """
+    if not conflict_set:
+        return []
+    
+    return sorted(
+        conflict_set,
+        key=lambda r: (r['confianza'], len(r['condiciones'])),
+        reverse=True
+    )
+
+
+
+def inferir(base_conocimiento, hechos):
+    """
+    Motor de inferencia principal con soporte para ranking de diagnósticos.
+    """
+    print()
+    print('━' * 60)
+    print('  MOTOR DE INFERENCIA INICIADO')
+    print('━' * 60)
+    print(f'  Hechos ingresados: {list(hechos)}')
+    print()
+
+    conflict_set = equiparar(base_conocimiento, hechos)
+
+    if not conflict_set:
+        print('  ⚠ No se encontraron reglas aplicables.')
+        print('  Considera agregar más síntomas o revisar la base de conocimiento.')
+        print('━' * 60)
+        return
+
+    # Ordenar todas las reglas que aplican de mayor a menor confianza
+    diagnosticos = ordenar_diagnosticos(conflict_set)
+
+    print('  RANKING DE DIAGNÓSTICOS POSIBLES')
+    print('  ───────────────────────────────────────────────────────────')
+    
+    for i, regla in enumerate(diagnosticos, 1):
+        porcentaje = regla["confianza"] * 100
+        print(f'  {i}. [{porcentaje:.0f}% de Confianza] — Regla {regla["id"]}: {regla["descripcion"]}')
+        print(f'     ➔ Recomendación: {regla["conclusion"]}')
+        print(f'     ➔ Síntomas clave: {regla["condiciones"]}')
+        if i < len(diagnosticos):
+            print('  ───────────────────────────────────────────────────────────')
+
+    print('━' * 60)
 
 # ──────────────────────────────────────────────────────────────
 # COMPONENTE 5: INTERFAZ DE USUARIO
@@ -184,5 +249,5 @@ def consultar():
     inferir(base_de_conocimiento, base_de_hechos)
 
 
-# Ejecutar
+# Ejecutar programa
 consultar()
