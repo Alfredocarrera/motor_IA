@@ -258,6 +258,11 @@ PREGUNTAS = {
     "pantalla_azul_frecuente":  "¿Aparece pantalla azul (BSOD) con frecuencia?",
     "se_apaga_solo":            "¿El equipo se apaga solo sin advertencia?",
     "calor_excesivo":           "¿El chasis está muy caliente al tacto?"
+"puntero_no_mueve":         "¿El mouse no se mueve?",
+   "teclas_no_reaccionan":     "¿Al escribir el teclado no responde?",
+   "fallo_audio":              "¿El audio del equipo no funciona?",
+   "Hora_no_coincide":         "¿Al iniciar la pc la hora no concuerda o cada dia cambia unos minutos?",
+   "Mensajes_de_error_al_arrancar": "¿Al arrancar la maquina aparecen codigos de error que inician en CMOS?"
 }
 
 def consultar():
