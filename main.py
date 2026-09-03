@@ -174,7 +174,7 @@ def inferir(base_conocimiento, hechos):
     print('━' * 55)
 
 """
-
+#codigo modificado par presentar un listado de diagnostico y no solo el de mayo r confianza
 def equiparar(base_conocimiento, hechos):
     """
     Proceso de equiparación (pattern matching).
@@ -195,7 +195,7 @@ def ordenar_diagnosticos(conflict_set):
     """
     if not conflict_set:
         return []
-    
+    # se cambio la propiedad max por sorted para obtener un listado de diagnosticos y no solo el de mayor confianza
     return sorted(
         conflict_set,
         key=lambda r: (r['confianza'], len(r['condiciones'])),
@@ -212,7 +212,7 @@ def inferir(base_conocimiento, hechos):
     print('━' * 60)
     print('  MOTOR DE INFERENCIA INICIADO')
     print('━' * 60)
-    print(f'  Hechos ingresados: {list(hechos)}')
+    print(f'  Hechos ingresados: {list(hechos)}') #si obtine la lista de hechos ingresados
     print()
 
     conflict_set = equiparar(base_conocimiento, hechos)
@@ -228,7 +228,7 @@ def inferir(base_conocimiento, hechos):
 
     print('  RANKING DE DIAGNÓSTICOS POSIBLES')
     print('  ───────────────────────────────────────────────────────────')
-    
+    # Mostrar cada diagnóstico con su confianza, descripción y recomendación en una lista numerada
     for i, regla in enumerate(diagnosticos, 1):
         porcentaje = regla["confianza"] * 100
         print(f'  {i}. [{porcentaje:.0f}% de Confianza] — Regla {regla["id"]}: {regla["descripcion"]}')
